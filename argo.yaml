@@ -1,5 +1,5 @@
 ---
-# Source: lior-app/templates/service.yaml
+# Source: doron-app/templates/service.yaml
 kind: Service     
 apiVersion: v1     
 metadata:
@@ -14,11 +14,11 @@ spec:
     port: 8000 #from Values
     targetPort: 8000  #from values
 ---
-# Source: lior-app/templates/deployment.yaml
+# Source: doron-app/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lior-app #from RELEASE NAME
+  name: doron-app #from RELEASE NAME
 spec:
   selector: 
     matchLabels:
@@ -31,6 +31,6 @@ spec:
     spec:
       containers:
       - name: my-app #from values
-        image: liorshasha/myapp-my_project:latest #from values
+        image: jb/myapp-my_project:latest #from values
         ports:
         - containerPort: 8000
