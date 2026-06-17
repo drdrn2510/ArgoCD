@@ -31,6 +31,6 @@ spec:
     spec:
       containers:
       - name: my-app #from values
-        image: shalram/hello-newapp:latest #from values
+        image: shalram/hello-newapp:3 #from values
         ports:
         - containerPort: 8000
