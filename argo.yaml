@@ -12,7 +12,7 @@ spec:
     path: helm 
     # REMOVED: The entire helm/valueFiles block is gone
   destination:
-    server: 'https://default.svc'
+    server: 'https://kubernetes.default.svc'
     namespace: default 
   syncPolicy:
     automated:
