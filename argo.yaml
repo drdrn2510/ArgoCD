@@ -1,36 +1,20 @@
----
-# Source: doron-app/templates/service.yaml
-kind: Service     
-apiVersion: v1     
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: my-app-service #from RELEASE NAME
+  name: doron-app
+  namespace: argocd 
 spec:
-  selector:
-    app: my-app
-  type: ClusterIP
-  ports:         
-  - name: http   
-    protocol: TCP
-    port: 8000 #from Values
-    targetPort: 8000  #from values
----
-# Source: doron-app/templates/deployment.yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: doron-app #from RELEASE NAME
-spec:
-  selector: 
-    matchLabels:
-      app: my-app
-  replicas: 1   #from values
-  template:
-    metadata:
-      labels:
-        app: my-app
-    spec:
-      containers:
-      - name: my-app #from values
-        image: jb/myapp-my_project:latest #from values
-        ports:
-        - containerPort: 8000
+  project: default
+  source:
+    repoURL: 'https://github.com/drdrn2510/ArgoCD.git'
+    targetRevision: HEAD
+    # Points to the folder where your single YAML file lives
+    path: helm 
+    # REMOVED: The entire helm/valueFiles block is gone
+  destination:
+    server: 'https://default.svc'
+    namespace: default 
+  syncPolicy:
+    automated:
+      prune: true     
+      selfHeal: true
